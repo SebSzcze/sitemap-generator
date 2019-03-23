@@ -9,6 +9,18 @@
             "email": "sebastian@ably.pl"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Ably\\Sitemap\\": "src/"
+        }
+    },
     "minimum-stability": "dev",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ably\\Sitemap\\SitemapServiceProvider"
+            ]
+        }
+    },
     "require": {}
 }
