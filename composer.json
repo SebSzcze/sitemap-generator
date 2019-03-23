@@ -1,5 +1,5 @@
 {
-    "name": "ably/sitemap-generator",
+    "name": "ablypl/sitemap-generator",
     "description": "Package to create sitemap.xml for you webpage",
     "type": "library",
     "license": "MIT",
