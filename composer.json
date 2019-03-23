@@ -1,0 +1,14 @@
+{
+    "name": "ably/sitemap-generator",
+    "description": "Package to create sitemap.xml for you webpage",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sebastian Szczepanski",
+            "email": "sebastian@ably.pl"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
