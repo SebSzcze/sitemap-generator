@@ -2,6 +2,8 @@
 
 namespace Ably\Sitemap;
 
+use Illuminate\Database\Eloquent\Model;
+
 /**
  * @author    Sebastian Szczepański
  * @copyright ably
@@ -19,9 +21,11 @@ trait HasSitemap
     /**
      * @return string
      */
-    public function getModificationDate(): string
+    public function getModificationDate(): ?string
     {
-        return $this->updated_at;
+        $column = $this->getUpdatedAtColumn();
+
+        return $this->{$column};
     }
 
     /**
@@ -31,5 +35,31 @@ trait HasSitemap
     public function getSitemapsImages(): array
     {
         return [];
+    }
+
+    /**
+     * @param $query
+     * @return mixed|void
+     */
+    public function scopeRecentlyModified($query)
+    {
+        $column = $this->getUpdatedAtColumn();
+
+        $model = $query->orderBy($column, 'DESC')->first();
+
+        if (!$model instanceof Model) {
+            return;
+        }
+
+        return $model->{$column};
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopePublished($query)
+    {
+        return $query;
     }
 }

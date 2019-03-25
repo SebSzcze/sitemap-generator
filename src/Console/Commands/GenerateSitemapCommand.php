@@ -43,21 +43,17 @@ class GenerateSitemapCommand extends Command
         $sitemapsCount = 0;
 
         foreach (config('sitemap.models') as $model) {
-
-            $updated = (new $model)->getUpdatedAtColumn();
-
             $count = $model::published()->count() / config('sitemap.chunk_size');
-            $date = $model::published()->latest($updated)->first()->{$updated};
-
             $sitemaps[$model] = [
                 'count' => (int)ceil($count),
-                'date' => $date
+                'date' => $model::recentlyModified()
             ];
         }
         
         foreach ($sitemaps as $model => $data) {
             $index = 1;
             while ($index <= $data['count']){
+                $this->comment($model);
                 GenerateSitemapJob::dispatch($model, $index);
                 ++$sitemapsCount;
                 ++$index;
