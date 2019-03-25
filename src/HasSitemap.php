@@ -58,7 +58,7 @@ trait HasSitemap
      * @param $query
      * @return mixed
      */
-    public function scopePublished($query)
+    public function scopePublishedForSitemap($query)
     {
         return $query;
     }

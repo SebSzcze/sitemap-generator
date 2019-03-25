@@ -42,7 +42,7 @@ class GenerateSitemapJob implements ShouldQueue
     {
         $offset = config('sitemap.chunk_size') * ($this->chunk - 1);
         
-        $items = $this->model::published()->skip($offset)->take(config('sitemap.chunk_size'))->get();
+        $items = $this->model::publishedForSitemap()->skip($offset)->take(config('sitemap.chunk_size'))->get();
 
         $data = view('sitemap::map')->with([
             'items' => $items

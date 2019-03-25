@@ -43,7 +43,7 @@ class GenerateSitemapCommand extends Command
         $sitemapsCount = 0;
 
         foreach (config('sitemap.models') as $model) {
-            $count = $model::published()->count() / config('sitemap.chunk_size');
+            $count = $model::publishedForSitemap()->count() / config('sitemap.chunk_size');
             $sitemaps[$model] = [
                 'count' => (int)ceil($count),
                 'date' => $model::recentlyModified()
